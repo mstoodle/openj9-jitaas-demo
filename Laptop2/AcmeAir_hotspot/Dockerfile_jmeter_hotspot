@@ -1,0 +1,77 @@
+# Copyright (c) 2018, 2018 IBM Corp. and others
+#
+# This program and the accompanying materials are made available under
+# the terms of the Eclipse Public License 2.0 which accompanies this
+# distribution and is available at https://www.eclipse.org/legal/epl-2.0/
+# or the Apache License, Version 2.0 which accompanies this distribution and
+# is available at https://www.apache.org/licenses/LICENSE-2.0.
+#
+# This Source Code may also be made available under the following
+# Secondary Licenses when the conditions for such availability set
+# forth in the Eclipse Public License, v. 2.0 are satisfied: GNU
+# General Public License, version 2 with the GNU Classpath
+# Exception [1] and GNU General Public License, version 2 with the
+# OpenJDK Assembly Exception [2].
+#
+# [1] https://www.gnu.org/software/classpath/license.html
+# [2] http://openjdk.java.net/legal/assembly-exception.html
+#
+# SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
+#
+
+# Dockerfile to build a jmeter container able to drive acmeair
+# Results appear on /output in the container
+# Must specify the hostname for the acmeair application (or localhost will be assumed)
+
+FROM adoptopenjdk/openjdk8-openj9:jdk8u181-b13_openj9-0.9.0
+
+ENV JMETER_VERSION 4.0
+
+# Install pre-requisite packages
+RUN apt-get update && apt-get install -y --no-install-recommends wget unzip \
+       && rm -rf /var/lib/apt/lists/*
+
+# Install jmeter 
+RUN   mkdir /jmeter \
+        && mkdir /output \
+        && cd /jmeter/ \
+        && wget https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-$JMETER_VERSION.tgz \
+        && tar -xzf apache-jmeter-$JMETER_VERSION.tgz \ 
+        && rm apache-jmeter-$JMETER_VERSION.tgz 
+
+# Set jmeter home 
+ENV JMETER_HOME /jmeter/apache-jmeter-$JMETER_VERSION 
+
+# Add jmeter to the PATH  
+ENV PATH $JMETER_HOME/bin:$PATH 
+
+# Set JVM options
+ENV JVM_ARGS "-Xms1g -Xmx1g -Xtune:virtualized"
+
+# We should set summariser.interval=6 in bin/jmeter.properties
+RUN echo 'summariser.interval=6' >> $JMETER_HOME/bin/jmeter.properties
+
+# Copy the script to be executed and other needed files
+COPY AcmeAir-v3.jmx $JMETER_HOME/AcmeAir-v3.jmx
+COPY Airports.csv $JMETER_HOME/Airports.csv
+COPY Airports2.csv $JMETER_HOME/Airports2.csv
+COPY hosts.csv $JMETER_HOME/hosts.csv
+COPY json-simple-1.1.1.jar $JMETER_HOME/lib/ext/
+COPY acmeair-driver-1.0-SNAPSHOT.jar $JMETER_HOME/lib/ext/
+COPY applyLoad.sh $JMETER_HOME/bin/applyLoad.sh
+RUN chmod u+x $JMETER_HOME/bin/applyLoad.sh
+
+# Adjust the host this is going to connect to based on an environment variable
+ENV LIBERTYHOST 192.168.0.10
+
+# Environment variables that we want the user to redefine
+ENV JPORT 9090
+ENV JUSERBOTTOM 0
+ENV JUSER 199
+ENV JURL acmeair-webapp
+ENV JTHREAD 15
+ENV JDURATION 60
+
+EXPOSE 2003
+
+ENTRYPOINT ["jmeter.sh"]
