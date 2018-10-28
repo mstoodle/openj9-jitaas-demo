@@ -1,0 +1,12 @@
+Laptop1/server_hotspot/j2sdk-image-hotspot
+Laptop1/server_nojit1/grpc
+Laptop1/server_nojit1/j2sdk-image
+Laptop1/server_nojit2/grpc
+Laptop1/server_nojit2/j2sdk-image
+Laptop1/server_openj9/grpc
+Laptop1/server_openj9/j2sdk-image
+Laptop2/jitserver/grpc
+Laptop2/jitserver/j2sdk-image
+hotspot/j2sdk-image-hotspot
+openj9/j2sdk-image
+openj9/openj9-openjdk-jdk8
