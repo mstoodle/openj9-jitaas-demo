@@ -38,30 +38,8 @@ echo Building jmeter client for server_nojit2
 cd AcmeAir_nojit2	&& ./build_jmeter_nojit2.sh	&& cd ..
 
 echo Building openj9 for jitserver now
-# download all openjdk, openj9, and omr repos
 pushd ../openj9
-
-# Fetch OpenJDK extensions project for JDK8
-git clone https://github.com/ibmruntimes/openj9-openjdk-jdk8
-cd openj9-openjdk-jdk8
-
-# needed this temporarily while openssl issues are worked out
-# Live demo at Code One did use this particular commit
-#git checkout 1ba8f1a08bdf67590fabbb0b4a57195da97dd2ef
-
-# will download latest openj9 and omr code on the jitaas branch
-bash ./get_source.sh -openj9-branch=jitaas -omr-branch=jitaas
-
-# make sure we have everything for j9 build environment set up in a docker container called 'openj9'
-sudo docker build -f openj9/buildenv/docker/jdk8/x86_64/ubuntu16/Dockerfile -t=openj9 .
-
-# This will build the container that will be used for all servers that use OpenJDK8 with OpenJ9 JVM
-sudo docker build -f Dockerfile_build_openj9 -t=build_openj9 .
-
-# Make SDKs available to the server containers
-cd ..
-./build_openj9.sh
-
+./build_openj9.sh --fetch-repos
 popd
 
 echo Building jitserver

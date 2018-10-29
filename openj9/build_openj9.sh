@@ -32,6 +32,11 @@ if [[ "$1" == "--fetch-repos" ]]; then
 	# get and build the openj9 default build container
 	git clone https://github.com/ibmruntimes/openj9-openjdk-jdk8
 	cd openj9-openjdk-jdk8
+
+	# needed this temporarily while openssl issues are worked out
+	# Live demo at Code One did use this particular commit
+	#git checkout 1ba8f1a08bdf67590fabbb0b4a57195da97dd2ef
+
 	bash ./get_source.sh -openj9-branch=jitaas -omr-branch=jitaas
 	sudo docker build -f openj9/buildenv/docker/jdk8/x86_64/ubuntu16/Dockerfile -t=openj9 .
 	cd ..
