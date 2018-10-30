@@ -21,38 +21,59 @@
 # Note: mongorestore's --port option works differently than mongo's --port option
 #       mongorestore is --port=N whereas mongo is --port N  (yay!)
 
-echo Starting mongo db for server_hotspot
-sudo docker run --rm -d \
-    --network=host \
-    --cpuset-cpus=0 \
-    -v $PWD/acmeair_hotspot:/tmp/acmeair \
-    --name mongo_hotspot mongo --nojournal --port 27017
-sleep 2
-sudo docker exec -it mongo_hotspot mongorestore --port=27017 --drop /tmp/acmeair
 
-echo Starting mongo db for server_openj9
-sudo docker run --rm -d \
-    --network=host \
-    --cpuset-cpus=0 \
-    -v $PWD/acmeair_openj9:/tmp/acmeair \
-    --name mongo_openj9 mongo --nojournal --port 27117
-sleep 2
-sudo docker exec -it mongo_openj9 mongorestore --port=27117 --drop /tmp/acmeair
+if [[ "$1" == "--no-hotspot" ]]; then
+	echo No hotspot server will be started
+	shift
+else
+	echo Starting mongo db for server_hotspot
+	sudo docker run --rm -d \
+	    --network=host \
+	    --cpuset-cpus=0 \
+	    -v $PWD/acmeair_hotspot:/tmp/acmeair \
+	    --name mongo_hotspot mongo --nojournal --port 27017
+	sleep 2
+	sudo docker exec -it mongo_hotspot mongorestore --port=27017 --drop /tmp/acmeair
+fi
 
-echo Starting mongo db for server_nojit1
-sudo docker run --rm -d \
-    --network=host \
-    --cpuset-cpus=0 \
-    -v $PWD/acmeair_nojit1:/tmp/acmeair \
-    --name mongo_nojit1 mongo --nojournal --port 27217
-sleep 2
-sudo docker exec -it mongo_nojit1 mongorestore --port=27217 --drop /tmp/acmeair
+if [[ "$1" == "--no-openj9" ]]; then
+	echo No openj9 server will be started
+	shift
+else
+	echo Starting mongo db for server_openj9
+	sudo docker run --rm -d \
+	    --network=host \
+	    --cpuset-cpus=0 \
+	    -v $PWD/acmeair_openj9:/tmp/acmeair \
+	    --name mongo_openj9 mongo --nojournal --port 27117
+	sleep 2
+	sudo docker exec -it mongo_openj9 mongorestore --port=27117 --drop /tmp/acmeair
+fi
 
-echo Starting mongo db for server_nojit2
-sudo docker run --rm -d \
-    --network=host \
-    --cpuset-cpus=0 \
-    -v $PWD/acmeair_nojit2:/tmp/acmeair \
-    --name mongo_nojit2 mongo --nojournal --port 27317
-sleep 2
-sudo docker exec -it mongo_nojit2 mongorestore --port=27317 --drop /tmp/acmeair
+if [[ "$1" == "--no-nojit1" ]]; then
+	echo No nojit1 server will be started
+	shift
+else
+	echo Starting mongo db for server_nojit1
+	sudo docker run --rm -d \
+	    --network=host \
+	    --cpuset-cpus=0 \
+	    -v $PWD/acmeair_nojit1:/tmp/acmeair \
+	    --name mongo_nojit1 mongo --nojournal --port 27217
+	sleep 2
+	sudo docker exec -it mongo_nojit1 mongorestore --port=27217 --drop /tmp/acmeair
+fi
+
+if [[ "$1" == "--no-nojit2" ]]; then
+	echo No nojit2 server will be started
+	shift
+else
+	echo Starting mongo db for server_nojit2
+	sudo docker run --rm -d \
+	    --network=host \
+	    --cpuset-cpus=0 \
+	    -v $PWD/acmeair_nojit2:/tmp/acmeair \
+	    --name mongo_nojit2 mongo --nojournal --port 27317
+	sleep 2
+	sudo docker exec -it mongo_nojit2 mongorestore --port=27317 --drop /tmp/acmeair
+fi
