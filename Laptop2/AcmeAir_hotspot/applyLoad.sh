@@ -21,7 +21,7 @@
 
 sudo docker run -d --rm \
     --cpuset-cpus=4 \
-    -p 192.168.0.11:9090:9090 \
+    --network=host \
     -v $PWD/jmeter_output_hotspot:/output \
     -e JPORT=9090 -e JTHREAD=2 -e JDURATION=3600 -e JUSERBOTTOM=0 -e JUSER=199 \
     --name jmeter_hotspot jmeter_acmeair_hotspot

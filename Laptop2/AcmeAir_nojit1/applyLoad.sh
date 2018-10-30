@@ -21,7 +21,7 @@
 
 sudo docker run -d --rm \
     --cpuset-cpus=6 \
-    -p 192.168.0.11:9290:9290 \
+    --network=host \
     -v $PWD/jmeter_output_nojit1:/output \
     -e JPORT=9290 -e JTHREAD=2 -e JDURATION=3600 -e JUSERBOTTOM=0 -e JUSER=199 \
     --name jmeter_nojit1 jmeter_acmeair_nojit1

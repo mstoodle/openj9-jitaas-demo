@@ -58,8 +58,8 @@ COPY Airports2.csv $JMETER_HOME/Airports2.csv
 COPY hosts.csv $JMETER_HOME/hosts.csv
 COPY json-simple-1.1.1.jar $JMETER_HOME/lib/ext/
 COPY acmeair-driver-1.0-SNAPSHOT.jar $JMETER_HOME/lib/ext/
-COPY applyLoad.sh $JMETER_HOME/bin/applyLoad.sh
-RUN chmod u+x $JMETER_HOME/bin/applyLoad.sh
+COPY jmeter.sh $JMETER_HOME/bin/jmeter.sh
+RUN chmod u+x $JMETER_HOME/bin/jmeter.sh
 
 # Adjust the host this is going to connect to based on an environment variable
 ENV LIBERTYHOST 192.168.0.11

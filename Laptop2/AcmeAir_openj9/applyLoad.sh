@@ -21,7 +21,7 @@
 
 sudo docker run -d --rm \
     --cpuset-cpus=5 \
-    -p 192.168.0.11:9190:9190 \
+    --network=host \
     -v $PWD/jmeter_output_openj9:/output \
     -e JPORT=9190 -e JTHREAD=2 -e JDURATION=3600 -e JUSERBOTTOM=0 -e JUSER=199 \
     --name jmeter_openj9 jmeter_acmeair_openj9
