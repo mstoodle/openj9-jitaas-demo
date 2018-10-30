@@ -42,7 +42,7 @@ echo In 10 seconds, jitserver is expected to be available!
 sleep 10
 
 echo Starting server_nojit1
-./run_server_nojit1.sh $OPENJ9_NOJIT_CONTAINER_SIZE
+./run_server_nojit1_newCache.sh $OPENJ9_NOJIT_CONTAINER_SIZE
 
 echo Starting server_openj9
-./run_server_openj9.sh $OPENJ9_CONTAINER_SIZE
+./run_server_openj9_newCache.sh $OPENJ9_CONTAINER_SIZE
