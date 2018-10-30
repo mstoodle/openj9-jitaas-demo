@@ -31,32 +31,22 @@ if [[ "$1" == "1c" ]]; then
 
 elif [[ "$1" == "2c" ]]; then
 
-    echo "Using 2 cores (2,3)"
+    echo "Using 2 cores (3,4)"
     sudo docker run -d --rm \
         --network=host \
-        --cpuset-cpus='2,3' \
+        --cpuset-cpus='3,4' \
         -p 38400:38400 \
         -v $PWD/jitserver_output_2c:/output \
         --name jitserver jitserver 
 
-elif [[ "$1" == "3c" ]]; then
+else
 
-    echo "Using 3 cores (1,2,3)"
+    echo "Using 3 cores (3,4,5)"
     sudo docker run -d --rm \
         --network=host \
         --cpuset-cpus='1-3' \
         -p 38400:38400 \
         -v $PWD/jitserver_output_3c:/output \
-        --name jitserver jitserver 
-
-else
-
-    echo "Using 4 cores (0,1,2,3)"
-    sudo docker run -d --rm \
-        --network=host \
-        --cpuset-cpus='0-3' \
-        -v $PWD/jitserver_output_4c:/output \
-        -p 38400:38400 \
         --name jitserver jitserver 
 
 fi

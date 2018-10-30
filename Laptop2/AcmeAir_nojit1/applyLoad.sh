@@ -20,7 +20,7 @@
 #
 
 sudo docker run -d --rm \
-    --cpuset-cpus=6 \
+    --cpuset-cpus=2 \
     --network=host \
     -v $PWD/jmeter_output_nojit1:/output \
     -e JPORT=9290 -e JTHREAD=2 -e JDURATION=3600 -e JUSERBOTTOM=0 -e JUSER=199 \
