@@ -85,7 +85,7 @@ B10.							$ stopAll.sh
 
 ![Full 20 minute run result](https://github.com/mstoodle/openj9-jitaas-demo/blob/master/CodeOne_Final.png)
 
-The result of the demo shows that moving the JIT compiler out of the JVM to operate as an independent cloud service allows]
+The result of the demo shows that moving the JIT compiler out of the JVM to operate as an independent cloud service allows
 JVM servers to spend their cycles and memory more completely on the workload they were built for. That can mean more efficient
 ramp -up because JIT compilation tends to be a very CPU and memory intensive activity that primarily happens in the early
 stages of server start-up and application ramp-up.
