@@ -20,7 +20,8 @@
 #
 
 sudo rm -rf j2sdk-image grpc
-sudo cp -r ../openj9/j2sdk-image .
+sudo cp -r ../../openj9/j2sdk-image .
 sudo cp -r ../sharedCache_openj9 .
-sudo cp -r ../../grpc .
+cp -r ../../grpc .
+
 sudo docker build -f Dockerfile_server_openj9 -t server_openj9 .

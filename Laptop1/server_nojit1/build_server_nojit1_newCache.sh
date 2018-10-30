@@ -19,10 +19,9 @@
 # SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
 #
 
-
 sudo rm -rf j2sdk-image grpc
-sudo cp -r ../openj9/j2sdk-image .
-sudo rm ../sharedCache_openj9/*server_nojit*
+sudo cp -r ../../openj9/j2sdk-image .
 cp -r ../../grpc .
+sudo rm ../sharedCache_openj9/*server_nojit*
 
 sudo docker build -f Dockerfile_server_nojit1_newCache -t server_nojit1 .
