@@ -45,6 +45,7 @@ just before the keynote started (so the servers had been up and running for 20 m
 only had to run B7 (by pressing `<return>` on the pre-typed command) during the demo segment of the keynote.
 
 Here are the setup steps in order:
+
 ```
 	Laptop 1					Laptop 2
 A1.	$ ./buildForFirstRun.sh				$ ./buildAll.sh
@@ -62,6 +63,7 @@ A8.	$ ./buildAll.sh
 
 At this point, the demo has been completely built and these 'A' steps should not need to be repeated. The following
 steps are how you run the demo once it has been built:
+
 ```
 B1.							$ ./startAll.sh
 B2.							Open in browser: http://Laptop2:3000
@@ -77,6 +79,7 @@ B7.							$ ./applyLoadAll.sh
 B8. 				[ wait until run completes or you want to stop ]
 B9.	$ ./stopAll.sh
 B10.							$ stopAll.sh
+```
 
 # A few more details about the scripts
 
