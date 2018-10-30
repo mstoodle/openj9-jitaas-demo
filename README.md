@@ -113,7 +113,7 @@ and with username `admin` password `admin`.
 
 # What it should look like
 
-![Full 20 minute run result](CodeOne_Final.png?raw=true "Full 20 minute run result from Code One demo")
+![Full 20 minute run result](/CodeOne_Final.png)
 
 The result of the demo shows that moving the JIT compiler out of the JVM to operate as an independent cloud service allows]
 JVM servers to spend their cycles and memory more completely on the workload they were built for. That can mean more efficient
