@@ -19,7 +19,6 @@
 # SPDX-License-Identifier: EPL-2.0 OR Apache-2.0
 #
 
-
 sudo rm -rf j2sdk-image-hotspot
 sudo cp -r ../../hotspot/j2sdk-image-hotspot .
 sudo docker build -f Dockerfile_server_hotspot -t server_hotspot .
