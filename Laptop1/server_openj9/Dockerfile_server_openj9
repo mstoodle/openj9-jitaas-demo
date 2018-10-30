@@ -76,6 +76,6 @@ COPY acmeair-webapp-2.0.0-SNAPSHOT.war /config/apps
 COPY sharedCache_openj9 /cache
 ENV ACMEAIR_PROPERTIES=/config/mongo.properties
 
-ENV JVM_ARGS="-Xshareclasses:controlDir=/cache,name=server_openj9 -Xscaotmax32m -Xtune:virtualized -XX:+UseContainerSupport -Xjit:verbose={compilePerformance},vlog=/output/vlog,disableSuffixLogs,safeReservePhysicalMemoryValue=0"
+ENV JVM_ARGS="-Xshareclasses:controlDir=/cache,name=server_openj9 -Xscmaxaot32m -Xtune:virtualized -XX:+UseContainerSupport -Xjit:verbose={compilePerformance},vlog=/output/vlog,disableSuffixLogs,safeReservePhysicalMemoryValue=0"
 
 ENV JAVA_HOME="/opt/openjdk8-openj9"
