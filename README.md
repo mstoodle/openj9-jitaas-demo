@@ -109,7 +109,7 @@ Let's start to make the JVM an essential part of the cloud that makes the cloud 
 
 The script `buildForFirstRun.sh` will download and build all the docker containers and JVMs needed on Laptop1 for a "first run". In
 the first run, only the `server_openj9` and `server_nojit1` servers will be built and started. The purpose of this first run is to
-populate the shared classes caches for these two servers. These runs will not perform as well as subsequent runs will perform.
+populate the shared classes caches for these two servers. These runs will not perform as well as subsequent runs will perform, which is an area of active consideration.
 
 `startForFirstRun.sh` will start `server_openj9` and `server_nojit1` so they will be ready for a first run. It will pause for
 10 seconds to make sure you have started the `jitserver` on Laptop2 before it tries to start `server_nojit1`. Once started and the
@@ -129,11 +129,11 @@ If you want to run individual servers, you can look at `run_<server name>.sh` . 
 designed to be used to generate a new shared classes cache and will remove any existing shared classes cache for their server.
 
 The `run_telegraf.sh` script starts up the Telegraf monitoring service which will report docker container stats on Laptop1
-into an influx database on Laptop2 using the database names `server_docker_metrics` and `server_vm_metrics` .
+into an influx database on Laptop2 using the database names `server_docker_metrics` and `server_vm_metrics` . On Laptop2, Telegraf is configured to use database names `docker_metrics` and `vm_metrics`.
 
 The `run_influxdb.sh` script starts up the InfluxDB instance used to store all the monitoring data from Telegraf and from JMeter.
 
 The `run_grafana.sh` script starts up the Grafana software so that you can connect to it at the browser at http://localhost:3000
 and with username `admin` password `admin`.
 
-
+The `run_jitserver.sh` script starts up the JIT service using 1 core (run with `1c` argument), 2 cores (run with `2c` argument) or 3 cores (any other arguments including no arguments). It starts using core numbered at 3, so the demo should work as long as you have at least 4 cores (using `run_jitserver.sh 1c`.
