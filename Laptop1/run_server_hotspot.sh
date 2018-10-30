@@ -32,5 +32,5 @@ sudo docker run -d --rm \
     --cpus=0.5 \
     --memory=$CONTAINER_SIZE --memory-swap=$CONTAINER_SIZE \
     -p 192.168.0.10:9090:9090 \
-    -v $PWD/server_output_hotspot1:/output \
-    --name server_hotspot1 server_hotspot1
+    -v $PWD/server_output_hotspot:/output \
+    --name server_hotspot server_hotspot
