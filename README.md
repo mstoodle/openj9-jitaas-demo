@@ -77,8 +77,7 @@ B6.	(wait until activity on all servers dies down
 	 as expected)
 B7.							$ ./applyLoadAll.sh
 B8. 				[ wait until run completes or you want to stop ]
-B9.	$ ./stopAll.sh
-B10.							$ stopAll.sh
+B9.	$ ./stopAll.sh					$ stopAll.sh
 ```
 
 # What it should look like
