@@ -113,7 +113,7 @@ and with username `admin` password `admin`.
 
 # What it should look like
 
-![Full 20 minute run result](/CodeOne_Final.png)
+![Full 20 minute run result](https://github.com/mstoodle/openj9-jitaas-demo/blob/master/CodeOne_Final.png)
 
 The result of the demo shows that moving the JIT compiler out of the JVM to operate as an independent cloud service allows]
 JVM servers to spend their cycles and memory more completely on the workload they were built for. That can mean more efficient
