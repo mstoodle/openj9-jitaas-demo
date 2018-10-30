@@ -40,39 +40,41 @@ The recommended demo creation steps are (notice you'll have to run scripts at di
 The A steps are required to build the shared classes caches and then save them into the docker containers. It can be done
 with docker volumes, but I chose to actuall embed the generated caches into the Docker containers and that's why the A steps
 are more complicated than one might imagine. Once the caches are generated, you only have to run the much simpler B sequence
-to actually run the demo. In the Code One demo, I ran A1 through A11 well before the keynote. I ran B1 through B6 on stage
+to actually run the demo. For the Code One demo, I ran A1 through A8 well before the keynote. I ran B1 through B6 on stage
 just before the keynote started (so the servers had been up and running for 20 minutes before I even came on stage), and I
 only had to run B7 (by pressing `<return>` on the pre-typed command) during the demo segment of the keynote.
 
 Here are the setup steps in order:
 ```
 	Laptop 1					Laptop 2
-A1.							$ ./buildAll.sh
-A2.	$ ./buildForFirstRun.sh
-A3.							$ ./startForFirstRun.sh
-A4.	$ ./startForFirstRun.sh
-A5.	$ sudo docker stats
-A6.	[wait until activity on servers dies down]
-	
-A7.							$ ./applyLoadForFirstRun.sh
-A8.							[ wait until run completes ]
-A9.	$ ./stopAll.sh
-A10.							$ ./stopAll.sh
-A11.	$ ./buildAll.sh
+A1.	$ ./buildForFirstRun.sh				$ ./buildAll.sh
+	[ will take a long time ]			[ will take a long time ]
+A2.							$ ./startForFirstRun.sh
+A3.	$ ./startForFirstRun.sh
+A4.	[run sudo docker stats and wait until activity
+	 on servers dies down to around 1-2% ish
+	 levels, then ctrl-C out of docker stats]
+A5.							$ ./applyLoadForFirstRun.sh
+A6.							[ wait until run completes or at least about 5 minutes ]
+A7.	$ ./stopAll.sh					$ ./stopAll.sh
+A8.	$ ./buildAll.sh
 ```
 
-At this point, the demo has been completely built and A1 through A11 should not need to be repeated. The following
+At this point, the demo has been completely built and these 'A' steps should not need to be repeated. The following
 steps are how you run the demo once it has been built:
 ```
 B1.							$ ./startAll.sh
 B2.							Open in browser: http://Laptop2:3000
                     					                 [login: admin, password: admin]
-B3.							Click on AcmeAir Jit as a Service Demo dashboard
+B3.							Click on Acmeair Jit as a Service Demo dashboard
 B4.	$ ./startAll.sh
 B5.	$ sudo docker stats
-B6.	(wait until activity on all servers dies down)
+B6.	(wait until activity on all servers dies down
+	 then you can exit docker stats if you like
+	 but often useful to make sure activity is
+	 as expected)
 B7.							$ ./applyLoadAll.sh
-B8. [ wait until run completes or you want to stop ]
+B8. 				[ wait until run completes or you want to stop ]
 B9.	$ ./stopAll.sh
 B10.							$ stopAll.sh
 
