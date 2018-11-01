@@ -30,7 +30,7 @@ else
 	sudo docker run --rm -d \
 	    --network=host \
 	    --cpuset-cpus=0 \
-	    -v $PWD/acmeair_hotspot:/tmp/acmeair \
+	    -v $PWD/AcmeAir_hotspot:/tmp/acmeair \
 	    --name mongo_hotspot mongo --nojournal --port 27017
 	sleep 2
 	sudo docker exec -it mongo_hotspot mongorestore --port=27017 --drop /tmp/acmeair
@@ -44,7 +44,7 @@ else
 	sudo docker run --rm -d \
 	    --network=host \
 	    --cpuset-cpus=0 \
-	    -v $PWD/acmeair_openj9:/tmp/acmeair \
+	    -v $PWD/AcmeAir_openj9:/tmp/acmeair \
 	    --name mongo_openj9 mongo --nojournal --port 27117
 	sleep 2
 	sudo docker exec -it mongo_openj9 mongorestore --port=27117 --drop /tmp/acmeair
@@ -58,7 +58,7 @@ else
 	sudo docker run --rm -d \
 	    --network=host \
 	    --cpuset-cpus=0 \
-	    -v $PWD/acmeair_nojit1:/tmp/acmeair \
+	    -v $PWD/AcmeAir_nojit1:/tmp/acmeair \
 	    --name mongo_nojit1 mongo --nojournal --port 27217
 	sleep 2
 	sudo docker exec -it mongo_nojit1 mongorestore --port=27217 --drop /tmp/acmeair
@@ -72,7 +72,7 @@ else
 	sudo docker run --rm -d \
 	    --network=host \
 	    --cpuset-cpus=0 \
-	    -v $PWD/acmeair_nojit2:/tmp/acmeair \
+	    -v $PWD/AcmeAir_nojit2:/tmp/acmeair \
 	    --name mongo_nojit2 mongo --nojournal --port 27317
 	sleep 2
 	sudo docker exec -it mongo_nojit2 mongorestore --port=27317 --drop /tmp/acmeair
